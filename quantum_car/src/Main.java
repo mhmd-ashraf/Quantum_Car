@@ -9,20 +9,25 @@ public class Main {
         car.accelerate();
         car.accelerate();
         car.breakSpeed();
+        car.breakSpeed();
         car.stop();
 
         System.out.println("====================================");
         Car car2 = carFactory.createCar("Hybird");
         car2.start();
-        car2.accelerate();
-        car2.accelerate();
-        car2.accelerate();
-        car2.accelerate();
-        car2.breakSpeed();
+        car2.accelerate();//20
+        car2.accelerate();//40
+        car2.accelerate();//60
+        car2.accelerate();//80
+        car2.breakSpeed();//60
+        car2.breakSpeed();//40
+        car2.stop();
+        car2.breakSpeed();//20
+        car2.breakSpeed();//stopped
         car2.breakSpeed();
 
         System.out.println("====================================");
         carFactory.replaceEngine(car , "Electric");
-        car.start();
+
     }
 }

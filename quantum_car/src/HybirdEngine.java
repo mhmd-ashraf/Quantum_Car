@@ -1,27 +1,32 @@
 public class HybirdEngine implements Engine{
+
     private ElectricEngine electricEngine;
     private GasEngine gasEngine;
     private int speed;
+    private Engine runningEngine;
 
     public HybirdEngine(){
         electricEngine = new ElectricEngine();
         gasEngine = new GasEngine();
+        runningEngine = electricEngine;
         speed = 0;
     }
 
     @Override
     public void increase(){
-        if(speed < 50) electricEngine.increase();
-        else gasEngine.increase();
+        checkRunningEngine();
         speed++;
+        runningEngine.increase();
     }
 
     @Override
     public void decrease(){
-        if(speed < 50) electricEngine.decrease();
-        else gasEngine.decrease();
-        if(speed > 0)
+        if(speed > 0) {
             speed--;
+            runningEngine.decrease();
+            checkRunningEngine();
+        }
+
 
     }
 
@@ -32,24 +37,26 @@ public class HybirdEngine implements Engine{
 
     @Override
     public String getEngineType() {
-        if(speed < 50) {
-            return electricEngine.getEngineType();
-        }
-        else {
-            return gasEngine.getEngineType();
-        }
+        return runningEngine.getEngineType();
     }
 
     @Override
     public void setSpeed(int speed) {
         this.speed = speed;
-        if(speed < 50) {
+       checkRunningEngine();
+       runningEngine.setSpeed(speed);
+    }
+
+    private void checkRunningEngine(){
+        if(speed <= 50) {
             electricEngine.setSpeed(speed);
             gasEngine.setSpeed(0);
+            runningEngine = electricEngine;
         }
         else {
             gasEngine.setSpeed(speed);
             electricEngine.setSpeed(0);
+            runningEngine = gasEngine;
         }
     }
 }

@@ -14,10 +14,11 @@ public class CarFactory {
     }
 
     public void replaceEngine(Car car, Engine engine){
-        car.setEngine(engine);
+        car.replaceEngine(engine);
     }
 
     public void replaceEngine(Car car, String engineType){
-        car.setEngine(createEngine(engineType));
+
+        car.replaceEngine(createEngine(engineType));
     }
 }
